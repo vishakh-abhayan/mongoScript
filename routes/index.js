@@ -10,8 +10,12 @@ router.get("/", function (req, res, next) {
 router.post("/submit", (req, res) => {
   console.log(req.body);
   MongoClient.connect("mongodb://localhost:27017", function (err, client) {
-    if (err) console.log("error");
-    else console.log("datbase conected");
+    if (err) {
+      console.log("error");
+    } else {
+      console.log("datbase conected");
+      client.db("Singup").collection("user").insertOne(req.body);
+    }
   });
   res.send("<h1>Got IT</h1>");
 });
